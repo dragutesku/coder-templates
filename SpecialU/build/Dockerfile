@@ -1,19 +1,19 @@
-# Get latest ubuntu image
-FROM ubuntu:latest
+# Download base image ubuntu 22.04
+FROM ubuntu:22.04
+
+# Disable Prompt During Packages Instalation
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Update Ubuntu Software repository
+RUN apt update
+RUN apt upgrade -y
 
 # Install necessary packages from ubuntu repos
-RUN apt-get -y update \
-    && apt-get install -y \
-    curl \
-    get \
-    sudo \
-    vim \
-    git \
-    wget \
-    zsh \
-    ripgrep \
-    build-base \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt install -y curl vim git wget zsh ripgrep build-base
+
+RUN rm -rf /var/lib/apt/lists/*
+
+RUN apt clean
 
 ARG USER=coder
 RUN useradd --groups sudo --no-create-home --shell /bin/bash ${USER} \
