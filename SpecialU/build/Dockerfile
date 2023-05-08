@@ -10,8 +10,11 @@ RUN apt-get install -y \
     get \
     sudo \
     vim \
+    git \
     wget \
     zsh \
+    ripgrep \
+    build-base \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Oh My Zsh
