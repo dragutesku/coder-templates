@@ -1,5 +1,5 @@
 # Download base image ubuntu 22.04
-FROM ubuntu:22.04
+FROM ubuntu
 
 # Disable Prompt During Packages Instalation
 ARG DEBIAN_FRONTEND=noninteractive
