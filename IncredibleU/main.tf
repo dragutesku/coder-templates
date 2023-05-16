@@ -62,9 +62,14 @@ resource "coder_agent" "main" {
       echo "Installing dotfiles from $DOTFILES_URI"
 
       echo $(whoami)
-      echo $(pwd)
       
-      coder dotfiles -y "$DOTFILES_URI"
+      echo $(pwd)
+
+      git clone "$DOTFILES_URI"
+
+      bin/bash $HOME/dotfiles/setup.sh
+
+      # coder dotfiles -y "$DOTFILES_URI"
     fi
   EOT
 
