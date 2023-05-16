@@ -58,17 +58,17 @@ resource "coder_agent" "main" {
     /tmp/code-server/bin/code-server --auth none --port 13337 >/tmp/code-server.log 2>&1 &
 
     # install dotfiles
-    if [ -n "$DOTFILES_URI" ]; then
-      echo "Installing dotfiles from $DOTFILES_URI";
+    #if [ -n "$DOTFILES_URI" ]; then
+    echo "Installing dotfiles from $DOTFILES_URI";
 
-      echo $(whoami);
+    echo $(whoami);
 
-      echo $(pwd);
+    echo $(pwd);
 
-      git clone "$DOTFILES_URI" && sh ./dotfiles/setup.sh;
+    git clone "$DOTFILES_URI" && sh ./dotfiles/setup.sh;
 
-      # coder dotfiles -y "$DOTFILES_URI";
-    fi
+    # coder dotfiles -y "$DOTFILES_URI";
+    #fi
   EOT
 
   # These environment variables allow you to make Git commits right away after creating a
