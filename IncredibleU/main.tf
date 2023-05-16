@@ -64,6 +64,8 @@ resource "coder_agent" "main" {
     echo $(whoami);
 
     echo $(pwd);
+    
+    rm -rf dotfiles
 
     git clone "$DOTFILES_URI" && cd dotfiles && /bin/bash setup.sh;
 
