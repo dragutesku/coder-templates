@@ -65,7 +65,7 @@ resource "coder_agent" "main" {
 
     echo $(pwd);
 
-    git clone "$DOTFILES_URI" && sh ./dotfiles/setup.sh;
+    git clone "$DOTFILES_URI" && cd dotfiles && /bin/bash setup.sh;
 
     # coder dotfiles -y "$DOTFILES_URI";
     #fi
