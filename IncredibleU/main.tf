@@ -51,6 +51,12 @@ resource "coder_agent" "main" {
   startup_script         = <<-EOT
     set -e
 
+    # install dotfiles
+    if [ -n "$DOTFILES_URI" ]; then
+      echo "Installing dotfiles from $DOTFILES_URI"
+      coder dotfiles -y "$DOTFILES_URI"
+    fi
+
     # install and start code-server
     curl -fsSL https://code-server.dev/install.sh | sh -s -- --method=standalone --prefix=/tmp/code-server --version 4.11.0
     /tmp/code-server/bin/code-server --auth none --port 13337 >/tmp/code-server.log 2>&1 &
@@ -61,6 +67,7 @@ resource "coder_agent" "main" {
   # You can remove this block if you'd prefer to configure Git manually or using
   # dotfiles. (see docs/dotfiles.md)
   env = {
+    "DOTFILES_URI"      = data.coder_parameter.dotfiles_uri.value != "" ? data.coder_parameter.dotfiles_uri.value : null
     GIT_AUTHOR_NAME     = "${data.coder_workspace.me.owner}"
     GIT_COMMITTER_NAME  = "${data.coder_workspace.me.owner}"
     GIT_AUTHOR_EMAIL    = "${data.coder_workspace.me.owner_email}"
