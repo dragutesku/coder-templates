@@ -60,7 +60,10 @@ resource "coder_agent" "main" {
     # install dotfiles
     if [ -n "$DOTFILES_URI" ]; then
       echo "Installing dotfiles from $DOTFILES_URI"
-      chmod -R a+rwx $HOME/.config
+
+      echo $(whoami)
+      echo $(pwd)
+      
       coder dotfiles -y "$DOTFILES_URI"
     fi
   EOT
