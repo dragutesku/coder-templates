@@ -14,7 +14,7 @@ RUN apt-get update \
 ARG USER=coder
 RUN useradd --groups sudo --no-create-home --shell /bin/bash ${USER} \
 	&& echo "${USER} ALL=(ALL) NOPASSWD:ALL" >/etc/sudoers.d/${USER} \
-	&& chmod 0440 /etc/sudoers.d/${USER} \
-	&& chmod +x /home/${USER}/.config/coderv2
+	&& chmod 0440 /etc/sudoers.d/${USER}
 USER ${USER}
 WORKDIR /home/${USER}
+RUN chmod -R a+rwx /home/${USER}/.config/coderv2
