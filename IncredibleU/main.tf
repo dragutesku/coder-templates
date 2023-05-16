@@ -47,7 +47,6 @@ data "coder_parameter" "dotfiles_uri" {
 resource "coder_agent" "main" {
   arch                   = data.coder_provisioner.me.arch
   os                     = "linux"
-  dir                    = "/home/coder"
   startup_script_timeout = 180
   startup_script         = <<-EOT
     #!/bin/bash
