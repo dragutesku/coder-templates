@@ -119,7 +119,7 @@ resource "docker_container" "workspace" {
     ip   = "host-gateway"
   }
   volumes {
-    container_path = "/home/${local.username}"
+    container_path = "/home"
     volume_name    = docker_volume.home_volume.name
     read_only      = false
   }

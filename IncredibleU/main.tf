@@ -47,7 +47,6 @@ data "coder_parameter" "dotfiles_uri" {
 resource "coder_agent" "main" {
   arch                   = data.coder_provisioner.me.arch
   os                     = "linux"
-  dir                    = "/home/coder"
   startup_script_timeout = 180
   startup_script         = <<-EOT
     #!/bin/bash
@@ -156,7 +155,7 @@ resource "docker_container" "workspace" {
     ip   = "host-gateway"
   }
   volumes {
-    container_path = "/home/${local.username}"
+    container_path = "/home"
     volume_name    = docker_volume.home_volume.name
     read_only      = false
   }
